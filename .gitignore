@@ -1,0 +1,9 @@
+#node modules
+/node_modules
+
+#dot env enviroment variables
+.env
+
+#others
+.idea/
+

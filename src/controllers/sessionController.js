@@ -15,7 +15,7 @@ const loginUser = async (req, res) => {
                 res.status(401).send("INVALID PASSWORD");
             } else {
                 const token = await getJwtToken(user[0]);
-                res.status(200).send(token)
+                res.status(200).send({token:token})
             }
         }
     } catch (e) {

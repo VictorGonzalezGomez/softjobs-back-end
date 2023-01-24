@@ -1,3 +1,3 @@
 CREATE DATABASE softjobs;
 \c softjobs
-CREATE TABLE usuarios ( id SERIAL PRIMARY KEY, email VARCHAR(50) NOT NULL, password VARCHAR(60) NOT NULL, rol VARCHAR(25), lenguage VARCHAR(20) );
+CREATE TABLE usuarios ( id SERIAL PRIMARY KEY, email VARCHAR(50) NOT NULL UNIQUE, password VARCHAR(60) NOT NULL, rol VARCHAR(25), lenguage VARCHAR(20) );

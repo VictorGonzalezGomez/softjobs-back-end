@@ -1,17 +1,11 @@
-const { createUser, getUser, getAllUsers } = require('../models/usersModel')
-const jwt = require('jsonwebtoken');
+const { createUser, getUser } = require('../models/usersModel')
+
 
 const userRegister = async (req, res) => {
     try {
         const payload = req.body;
-        console.log("payload",payload)
-        const validateUser = await getAllUsers();
-        console.log("validate user",validateUser);
-        const userExists = validateUser.filter(user => user.email == payload.email);
-        console.log("user exists length", userExists.length)
-
+        const userExists = await getUser(payload.email);
         if (userExists.length==0){
-            console.log("PAYLOAD CONTROLLER",payload);
             const newUser = await createUser(payload);
             res.status(201).json(newUser);
         }
@@ -24,8 +18,7 @@ const userRegister = async (req, res) => {
 
 const gettingUser = async  (req, res) =>{
     try {
-        const token = req.header('Authorization').split(' ')[1];
-        const { email } = jwt.decode(token);
+        const email  = req.user.email;
         const user = await getUser(email);
         res.json(user[0]);
     } catch (e) {
